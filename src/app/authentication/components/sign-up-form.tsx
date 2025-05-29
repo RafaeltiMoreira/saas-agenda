@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const registerSchema = z.object({
   name: z.string().trim().min(1, { message: "Nome é obrigatório." }),
@@ -36,6 +37,13 @@ const SignUpForm = () => {
     }, {
       onSuccess: () => {
         router.push("/dashboard");
+      },
+      onError: (ctx) => {
+        if (ctx.error.code === "USER_ALREADY_EXISTS") {
+          toast.error("Já existe uma conta com este e-mail.");
+          return;
+        }
+        toast.error("Erro ao criar conta.");
       }
     })
   }
