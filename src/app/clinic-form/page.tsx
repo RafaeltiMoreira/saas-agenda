@@ -20,7 +20,6 @@ const ClinicFormPage = () => {
             </DialogDescription>
           </DialogHeader>
           <ClinicForm />
-          
         </DialogContent>
       </Dialog>
     </div>
